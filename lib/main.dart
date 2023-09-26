@@ -5,20 +5,21 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.red,
-          foregroundColor: Colors.black,
-          leading: Icon(
-            Icons.menu,
-            color: Colors.amber,
-          ),
-          title: Text("First Project"),
-          actions: [Icon(Icons.call), Icon(Icons.video_call)],
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.blue,
+          elevation: 20,
+          leading: Icon(Icons.menu),
+          title: Text("My Application"),
+          actions: [Icon(Icons.call), Icon(Icons.menu_book)],
         ),
+        body: Center(child: Text("Welcome to our application")),
       ),
     );
   }
