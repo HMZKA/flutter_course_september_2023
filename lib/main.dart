@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
           appBar: AppBar(
+            centerTitle: true,
             backgroundColor: Colors.white,
             foregroundColor: Colors.blue,
             elevation: 10,
@@ -22,58 +23,19 @@ class MyApp extends StatelessWidget {
             actions: [const Icon(Icons.call), const Icon(Icons.menu_book)],
           ),
           body: Container(
-            width: double.infinity,
             color: Colors.amber,
-            child: Column(
-              //  mainAxisAlignment: MainAxisAlignment.spaceAround,
+            height: double.infinity,
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
-//              mainAxisSize: MainAxisSize.min,
-              // 1 +1 +1 +1=4
               children: [
-                Expanded(
-                  flex: 3,
-                  child: Container(
-                    color: Colors.blue,
-                    child: const Text(
-                      "First Text",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-                    ),
-                  ),
+                Text(
+                  "First Text",
+                  style: TextStyle(fontSize: 20),
                 ),
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    color: Colors.green,
-                    child: const Text(
-                      "Second Text",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 4,
-                  child: Container(
-                    color: Colors.pink,
-                    child: const Text(
-                      "Third Text",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 5,
-                  child: Container(
-                    color: Colors.purple,
-                    child: const Text(
-                      "Fourth Text",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                )
+                Text("Second Text", style: TextStyle(fontSize: 20)),
+                Text("Third Text", style: TextStyle(fontSize: 20)),
+                // Text("Fourth Text", style: TextStyle(fontSize: 20)),
               ],
             ),
           )),
