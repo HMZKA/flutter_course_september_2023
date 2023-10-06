@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_course/messenger_screen.dart';
+import 'package:flutter_application_course/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -10,6 +12,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool isScure = true;
   var icon = Icons.visibility;
+  var formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,12 +22,10 @@ class _LoginScreenState extends State<LoginScreen> {
         title: const Text("LoginScreen"),
         centerTitle: true,
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("images/10.jpg"), fit: BoxFit.cover)),
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Form(
+          key: formKey,
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             const Text(
               "Login",
@@ -34,7 +35,16 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 30,
             ),
             TextFormField(
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "email is required";
+                }
+                if (!(value.contains('@'))) {
+                  return "This not a valid email address";
+                }
+              },
               decoration: InputDecoration(
+                  //   errorStyle: TextStyle(color: Colors.black),
                   fillColor: Colors.white,
                   filled: true,
                   hintText: "example@example.com",
@@ -47,6 +57,14 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 17,
             ),
             TextFormField(
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "This is required";
+                }
+                if (value.length < 8) {
+                  return "this must be at least 8 characters";
+                }
+              },
               obscureText: isScure,
               decoration: InputDecoration(
                   fillColor: Colors.white,
@@ -74,7 +92,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: ButtonStyle(
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25)))),
-                onPressed: () {},
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                          builder: (context) => MessengerScreen(),
+                        ),
+                        (route) => false);
+                  }
+                },
                 child: Container(
                     width: MediaQuery.of(context).size.width / 2.5,
                     decoration:
@@ -91,7 +117,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: TextStyle(fontSize: 18),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const RegisterScreen(),
+                    ));
+                  },
                   child: const Text("Create account"),
                 )
               ],
