@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_course/counter_screen.dart';
+import 'package:flutter_application_course/dio_helper.dart';
 import 'package:flutter_application_course/streets_screen.dart';
 
 void main() {
+  DioHelper.init();
   runApp(const MyApp());
 }
 

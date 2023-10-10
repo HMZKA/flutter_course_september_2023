@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_course/cubit/counter_cubit.dart';
+import 'package:flutter_application_course/dio_helper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CounterScreen extends StatelessWidget {
-  CounterScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -28,7 +27,16 @@ class CounterScreen extends StatelessWidget {
                   Text(
                     "${CounterCubit().get(context).x}",
                     style: TextStyle(fontSize: 20),
-                  )
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        DioHelper.getApi()
+                            .then((value) => print(value?.data))
+                            .catchError((error) {
+                          print(error.toString());
+                        });
+                      },
+                      child: Text("Get Api"))
                 ],
               ),
             ),
