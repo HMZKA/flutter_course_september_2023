@@ -6,10 +6,8 @@ class DioHelper {
     dio = Dio(BaseOptions(baseUrl: "https://newsapi.org/v2/"));
   }
 
-  static Future<Response?> getApi() async {
-    return await dio?.get("everything", queryParameters: {
-      "q": "tesla",
-      "apiKey": "a269e4f1de864efc85f38b36f1bae318"
-    });
+  static Future<Response?> get(
+      {required String path, Map<String, dynamic>? queryParameters}) async {
+    return await dio?.get(path, queryParameters: queryParameters);
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_course/counter_screen.dart';
+import 'package:flutter_application_course/cubit/app_cubit.dart';
 import 'package:flutter_application_course/dio_helper.dart';
-import 'package:flutter_application_course/streets_screen.dart';
+
+import 'package:flutter_application_course/home_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   DioHelper.init();
@@ -13,7 +15,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false, home: CounterScreen());
+    return BlocProvider(
+      create: (context) => AppCubit()..getBusinessNews(),
+      child: MaterialApp(debugShowCheckedModeBanner: false, home: HomeScreen()),
+    );
   }
 }
