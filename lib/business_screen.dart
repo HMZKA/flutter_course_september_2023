@@ -17,7 +17,7 @@ class BusinessScreen extends StatelessWidget {
           condition: AppCubit().get(context).newsModel != null,
           builder: (context) => ListView.builder(
             physics: BouncingScrollPhysics(),
-            itemCount: 30,
+            itemCount: AppCubit().get(context).newsModel!.articles.length,
             itemBuilder: (BuildContext context, int index) {
               return buildItem(
                   newsModel: AppCubit().get(context).newsModel!,
