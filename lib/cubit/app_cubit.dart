@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_application_course/dio_helper.dart';
 import 'package:flutter_application_course/news_model.dart';
+import 'package:flutter_application_course/storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -9,9 +10,10 @@ part 'app_state.dart';
 class AppCubit extends Cubit<AppState> {
   AppCubit() : super(AppInitial());
   AppCubit get(context) => BlocProvider.of(context);
-  bool isDark = false;
+  bool isDark = Cache.getStorage(key: "isDark") ?? false;
   changeTheme() {
     isDark = !isDark;
+    Cache.setBool(key: "isDark", value: isDark);
     emit(ChangeThemeState());
   }
 

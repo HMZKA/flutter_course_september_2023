@@ -3,9 +3,12 @@ import 'package:flutter_application_course/cubit/app_cubit.dart';
 import 'package:flutter_application_course/dio_helper.dart';
 
 import 'package:flutter_application_course/home_screen.dart';
+import 'package:flutter_application_course/storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Cache.init();
   DioHelper.init();
   runApp(const MyApp());
 }
