@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_course/animated_align.dart';
-import 'package:flutter_application_course/animated_container_screen.dart';
-import 'package:flutter_application_course/animation_tween_screen.dart';
+import 'package:flutter_application_course/cubit/auth_cubit.dart';
+import 'package:flutter_application_course/dio_hepler.dart';
+import 'package:flutter_application_course/login_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
+  DioHelper.init();
   runApp(MyApp());
 }
 
@@ -12,7 +14,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false, home: AnimatedAlignScreen());
+    return BlocProvider(
+      create: (context) => AuthCubit(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: LoginScreen(),
+      ),
+    );
   }
 }

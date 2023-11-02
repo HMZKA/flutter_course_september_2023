@@ -33,6 +33,7 @@ dependencies:
   buildcondition: ^0.0.4
   cupertino_icons: ^1.0.2
   dio: ^5.3.3
+  
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.3
