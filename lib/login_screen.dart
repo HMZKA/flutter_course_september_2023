@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_course/cubit/auth_cubit.dart';
+import 'package:flutter_application_course/components.dart';
+import 'auth_cubit/auth_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -20,16 +21,9 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is LoginSuccessState) {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(content: Text("Login Succeed")),
-          );
+          showMessage();
         } else if (state is LoginErrorState) {
-          showDialog(
-            context: context,
-            builder: (context) =>
-                AlertDialog(content: Text("Credintials incorrect")),
-          );
+          showMessage();
         }
       },
       builder: (context, state) {

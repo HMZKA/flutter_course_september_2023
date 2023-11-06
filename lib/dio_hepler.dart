@@ -3,7 +3,9 @@ import 'package:dio/dio.dart';
 class DioHelper {
   static Dio? dio;
   static init() {
-    dio = Dio(BaseOptions(baseUrl: "https://student.valuxapps.com/api/"));
+    dio = Dio(BaseOptions(
+        baseUrl: "https://student.valuxapps.com/api/",
+        headers: {'Content-Type': 'application/json', "lang": "en"}));
   }
 
   static Future<Response?> get(
