@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_course/app_cubit/app_cubit.dart';
 import 'package:flutter_application_course/home_screen.dart';
+import 'package:flutter_application_course/main_screen.dart';
 import 'auth_cubit/auth_cubit.dart';
 import 'package:flutter_application_course/dio_hepler.dart';
 import 'package:flutter_application_course/login_screen.dart';
@@ -22,12 +23,14 @@ class MyApp extends StatelessWidget {
           create: (context) => AuthCubit(),
         ),
         BlocProvider(
-          create: (context) => AppCubit()..getHome(),
+          create: (context) => AppCubit()
+            ..getHome()
+            ..getCategories(),
         ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomeScreen(),
+        home: MainScreen(),
       ),
     );
   }

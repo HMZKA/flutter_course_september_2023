@@ -1,3 +1,4 @@
+import 'package:buildcondition/buildcondition.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_course/app_cubit/app_cubit.dart';
@@ -14,42 +15,45 @@ class HomeScreen extends StatelessWidget {
       builder: (context, state) {
         var cubit = AppCubit().get(context);
         var homeModel = AppCubit().get(context).homeModel;
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.black,
-            title: Text("ShopMall"),
-          ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                CarouselSlider(
-                  items: homeModel?.data?.banners
-                      .map((e) => Image.network(e.image!))
-                      .toList(),
-                  options: CarouselOptions(autoPlay: true, viewportFraction: 1),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    "New Products",
-                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+        return BuildCondition(
+          condition: homeModel != null,
+          builder: (context) {
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  CarouselSlider(
+                    items: homeModel?.data?.banners
+                        .map((e) => Image.network(e.image!))
+                        .toList(),
+                    options:
+                        CarouselOptions(autoPlay: true, viewportFraction: 1),
                   ),
-                ),
-                GridView.count(
-                    physics: NeverScrollableScrollPhysics(),
-                    childAspectRatio: 0.70,
-                    shrinkWrap: true,
-                    mainAxisSpacing: 10.0,
-                    crossAxisSpacing: 5.0,
-                    crossAxisCount: 2,
-                    children: [
-                      for (int i = 0; i < homeModel!.data!.products.length; i++)
-                        buildProduct(context, homeModel, i)
-                    ])
-              ],
-            ),
-          ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    child: Text(
+                      "New Products",
+                      style:
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  GridView.count(
+                      physics: NeverScrollableScrollPhysics(),
+                      childAspectRatio: 0.70,
+                      shrinkWrap: true,
+                      mainAxisSpacing: 10.0,
+                      crossAxisSpacing: 5.0,
+                      crossAxisCount: 2,
+                      children: [
+                        for (int i = 0;
+                            i < homeModel!.data!.products.length;
+                            i++)
+                          buildProduct(context, homeModel, i)
+                      ])
+                ],
+              ),
+            );
+          },
+          fallback: (context) => Center(child: CircularProgressIndicator()),
         );
       },
     );
