@@ -1,7 +1,8 @@
 import 'package:buildcondition/buildcondition.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_course/app_cubit/app_cubit.dart';
-import 'package:flutter_application_course/categories_model.dart';
+
+import 'package:flutter_application_course/controllers/app_cubit/app_cubit.dart';
+import 'package:flutter_application_course/models/categories_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategoryScreen extends StatelessWidget {

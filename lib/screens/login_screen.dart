@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_course/components.dart';
-import 'auth_cubit/auth_cubit.dart';
+import 'package:flutter_application_course/compnents/components.dart';
+import 'package:flutter_application_course/screens/main_screen.dart';
+import '/controllers/auth_cubit/auth_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -21,9 +22,14 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is LoginSuccessState) {
-          showMessage();
-        } else if (state is LoginErrorState) {
-          showMessage();
+          state.status
+              ? Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (context) => MainScreen(),
+                  ),
+                  (route) => false)
+              : showMessage(
+                  message: "Credntials not correct", color: Colors.red);
         }
       },
       builder: (context, state) {

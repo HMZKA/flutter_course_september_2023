@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter_application_course/categories_model.dart';
-import 'package:flutter_application_course/dio_hepler.dart';
-import 'package:flutter_application_course/home_model.dart';
-import 'package:flutter_application_course/product_model.dart';
+import 'package:flutter_application_course/models/categories_model.dart';
+import 'package:flutter_application_course/utils/dio_hepler.dart';
+import 'package:flutter_application_course/models/home_model.dart';
+import 'package:flutter_application_course/models/product_model.dart';
+import 'package:flutter_application_course/models/profile_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -52,6 +53,19 @@ class AppCubit extends Cubit<AppState> {
     }).catchError((error) {
       print(error.toString());
       emit(GetCategoriesDetailsDataErrorState());
+    });
+  }
+
+  ProfileModel? profileModel;
+  getProfile() {
+    emit(GetProfileLoadingState());
+    DioHelper.get(path: "profile").then((value) {
+      profileModel = ProfileModel.fromJson(value?.data["data"]);
+      print(value?.data);
+      emit(GetProfileSuccessState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(GetProfileErrorState());
     });
   }
 }

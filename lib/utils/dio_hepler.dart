@@ -1,11 +1,15 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_application_course/utils/cache.dart';
 
 class DioHelper {
   static Dio? dio;
   static init() {
-    dio = Dio(BaseOptions(
-        baseUrl: "https://student.valuxapps.com/api/",
-        headers: {'Content-Type': 'application/json', "lang": "en"}));
+    dio = Dio(
+        BaseOptions(baseUrl: "https://student.valuxapps.com/api/", headers: {
+      'Content-Type': 'application/json',
+      "lang": "en",
+      "Authorization": CacheHelper.get(key: "token") ?? ""
+    }));
   }
 
   static Future<Response?> get(

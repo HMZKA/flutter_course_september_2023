@@ -1,4 +1,4 @@
-import 'package:flutter_application_course/home_model.dart';
+import 'package:flutter_application_course/models/home_model.dart';
 
 class ProductModel {
   List<Products> products = [];

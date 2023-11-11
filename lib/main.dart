@@ -1,20 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_course/app_cubit/app_cubit.dart';
-import 'package:flutter_application_course/home_screen.dart';
-import 'package:flutter_application_course/main_screen.dart';
-import 'auth_cubit/auth_cubit.dart';
-import 'package:flutter_application_course/dio_hepler.dart';
-import 'package:flutter_application_course/login_screen.dart';
+
+import 'package:flutter_application_course/controllers/app_cubit/app_cubit.dart';
+import 'package:flutter_application_course/controllers/auth_cubit/auth_cubit.dart';
+import 'package:flutter_application_course/screens/on_boarding_screen.dart';
+import 'package:flutter_application_course/utils/cache.dart';
+import 'package:flutter_application_course/screens/home_screen.dart';
+import 'package:flutter_application_course/screens/main_screen.dart';
+
+import 'package:flutter_application_course/utils/dio_hepler.dart';
+import 'package:flutter_application_course/screens/login_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await CacheHelper.init();
   DioHelper.init();
-  runApp(MyApp());
+  Widget screen = OnBoardingScreen();
+  if (CacheHelper.get(key: "onBoard") ?? false) {
+    screen = LoginScreen();
+  }
+  runApp(MyApp(
+    screen: screen,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  MyApp({super.key, required this.screen});
+  Widget screen;
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -25,12 +37,13 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => AppCubit()
             ..getHome()
-            ..getCategories(),
+            ..getCategories()
+            ..getProfile(),
         ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: MainScreen(),
+        home: screen,
       ),
     );
   }

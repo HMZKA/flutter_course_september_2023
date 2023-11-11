@@ -24,3 +24,9 @@ class GetCategoriesDetailsDataLoadingState extends AppState {}
 class GetCategoriesDetailsDataSuccessState extends AppState {}
 
 class GetCategoriesDetailsDataErrorState extends AppState {}
+
+class GetProfileLoadingState extends AppState {}
+
+class GetProfileSuccessState extends AppState {}
+
+class GetProfileErrorState extends AppState {}
