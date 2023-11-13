@@ -3,6 +3,7 @@ import 'package:flutter_application_course/compnents/components.dart';
 import 'package:flutter_application_course/screens/main_screen.dart';
 import '/controllers/auth_cubit/auth_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -51,9 +52,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        "Login",
-                        style: TextStyle(
+                      Text(
+                        "${AppLocalizations.of(context)?.login}",
+                        style: const TextStyle(
                             fontSize: 24, fontWeight: FontWeight.w700),
                       ),
                       const SizedBox(
@@ -72,7 +73,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             fillColor: Colors.white,
                             filled: true,
                             hintText: "example@example.com",
-                            label: const Text("Email"),
+                            label:
+                                Text("${AppLocalizations.of(context)?.email}"),
                             prefixIcon: const Icon(Icons.email),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25))),
@@ -91,7 +93,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         decoration: InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
-                            label: const Text("Password"),
+                            label: Text(
+                                "${AppLocalizations.of(context)?.password}"),
                             hintText: "P@ssw0rd",
                             prefixIcon: const Icon(Icons.lock),
                             suffixIcon: IconButton(
@@ -128,24 +131,25 @@ class _LoginScreenState extends State<LoginScreen> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(25)),
                               child: state is LoginLoadingState
-                                  ? Center(
+                                  ? const Center(
                                       child: CircularProgressIndicator(
                                           color: Colors.white),
                                     )
-                                  : const Text(
-                                      "Sign in",
+                                  : Text(
+                                      "${AppLocalizations.of(context)?.login}",
                                       textAlign: TextAlign.center,
                                     ))),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
-                            "Don't have account?",
+                          Text(
+                            "${AppLocalizations.of(context)?.notHaveAccount}",
                             style: TextStyle(fontSize: 18),
                           ),
                           TextButton(
                             onPressed: () {},
-                            child: const Text("Create account"),
+                            child: Text(
+                                "${AppLocalizations.of(context)?.createAccount}"),
                           )
                         ],
                       )

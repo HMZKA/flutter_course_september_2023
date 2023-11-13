@@ -10,6 +10,7 @@ import 'package:flutter_application_course/screens/main_screen.dart';
 import 'package:flutter_application_course/utils/dio_hepler.dart';
 import 'package:flutter_application_course/screens/login_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,6 +44,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        locale: Locale('en'),
+        supportedLocales: AppLocalizations.supportedLocales,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
         home: screen,
       ),
     );
